@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>자바스크립트의 근본</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+  <h1 id="hello">안녕하세요</h1>
+  <!-- <h1 id="hi">JS 초보에요</h1> -->
+  <div class="alert-box">
+    <p>알림창임</p>
+    <button id="close">닫기</button>
+  </div>
+  <button onclick="alertSet('block','아이디입력해주세요')">버튼1</button>
+  <button onclick="alertSet('block','비밀번호입력해주세요')">버튼2</button>
+
+  <script>
+    const hello = document.getElementById('hello');
+    hello.innerHTML = '안녕';
+    hello.style.fontSize = '16px';
+    // document.querySelector('#hi').innerHTML = 'JS 고수에요';
+
+    document.querySelector('#close').addEventListener('click', () => {
+      document.querySelector('.alert-box').style.display = 'none';
+    });
+
+    function alertSet(param1, param2) {
+      document.querySelector('.alert-box').style.display = param1;
+      document.querySelector('p').innerHTML = param2;
+    }
+  </script>
+</body>
+
+</html>
