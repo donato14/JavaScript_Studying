@@ -19,7 +19,9 @@
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
+    <div class="render"></div>
   </nav>
+
 
   <ul class="list-group">
     <li class="list-group-item">An item</li>
@@ -29,21 +31,26 @@
     <li class="list-group-item">And a fifth one</li>
   </ul>
 
+
+
   <div class="main-bg">
     <h4>Shirts on Sale</h4>
     <button id="login" class="btn btn-danger">로그인</button>
   </div>
+
 
   <div class="black-bg">
     <div class="white-bg">
       <h4>로그인하세요</h4>
       <form action="success.html">
         <div class="my-3">
-          <input type="text" class="form-control" id="id">
+          <input type="text" class="form-control" id="id" placeholder="이메일형식입니다.">
         </div>
         <div class="my-3">
           <input type="password" class="form-control" id="pw">
-          <p id="notice">현재 비밀번호가 6자 이하입니다.</p>
+          <div id="notice" class="alert alert-danger">
+            현재 비밀번호가 6자 이하입니다.
+          </div>
         </div>
         <button type="submit" class="btn btn-primary" id="send">전송</button>
         <button type="button" class="btn btn-danger" id="close">닫기</button>
@@ -51,7 +58,50 @@
     </div>
   </div>
 
+  <div class="alert alert-danger" id="timer">
+    5초 이내 구매시 사은품 증정!
+  </div>
+  <div style="overflow: hidden;">
+    <div class="slide-container">
+      <dlv class="slide-box">
+        <img src="./image/car1.png">
+      </dlv>
+      <dlv class="slide-box">
+        <img src="./image/car2.png">
+      </dlv>
+      <dlv class="slide-box">
+        <img src="./image/car3.png">
+      </dlv>
+    </div>
+  </div>
+  <button class="prev">이전</button>
+  <button class="slide-1">1</button>
+  <button class="slide-2">2</button>
+  <button class="slide-3">3</button>
+  <button class="next">다음</button>
 
+  <div class="scrollTest" style="width: 200px; height: 100px; overflow-y: scroll;">
+    Lorem ipsum dolor sit, amet consectetur adipisicing
+    elit. Commodi illum esse enim optio neque pariatur fugit ut
+    facere nostrum nam, quae doloremque obcaecati perferendis sed magni quam reiciendis? Quasi quam accusamus est
+    assumenda amet, at necessitatibus facilis eligendi id adipisci, qui eum corporis. Laborum est maxime nobis dicta
+    aut, minima ipsa illo explicabo ullam earum excepturi neque voluptatum enim ipsam sint labore! Impedit quae,
+    inventore alias, totam commodi quibusdam sint deleniti neque iste accusamus nulla mollitia adipisci sed! Suscipit,
+    optio dolores asperiores sint ea dolore voluptatum dolor odio vel excepturi reprehenderit commodi maxime doloremque
+    similique, soluta deleniti sequi ratione? Sint odio accusantium est totam quidem eius laudantium corporis numquam
+    incidunt voluptatibus aliquam consequuntur error velit nostrum adipisci aspernatur accusamus dolorem repudiandae
+    expedita, officia vitae. Ad laudantium ab tempora illum ullam natus? Dolore repudiandae quod quae minima ipsa eos
+    accusamus quasi rem deleniti natus non libero itaque eius, impedit perspiciatis laudantium quidem officiis!
+    Accusantium, laboriosam. Deleniti quo dignissimos doloribus quaerat id ad ea quos similique, quae amet veritatis
+    porro quod omnis ab, maxime, officia vel perferendis magni repellat dolorum consectetur rerum qui aspernatur. Hic
+    tenetur voluptatum quaerat consequatur molestiae tempore quasi dolorem doloremque enim fugit, nostrum, fuga
+    architecto sit at facere!
+  </div>
+
+  <div style="height: 1000px;"></div>
+  <!-- <p>태조 이성계가 태어난 년도는?</p>
+  <input type="text" id="answer">
+  <button id="send-answer">제출</button> -->
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.js"></script>
@@ -85,6 +135,12 @@
       } else if ($('#pw').val().length < 6) {
         alert('비번이 짧습니당');
         return false
+      } else if (/\S+@\S+\.\S+/.test($('#id').val()) == false) {
+        alert('이메일 형식아님')
+        return false
+      } else if (/[A-Z]/.test($('#pw').val()) == false) {
+        alert('비번에 적어도 대문자 한자리 들어가야함')
+        return false
       } else {
         return true
       }
@@ -110,6 +166,99 @@
         mainColor.classList.remove('Dark');
       }
     });
+
+    $('#send-answer').on('click', () => {
+      if ($('#answer').val() == '1335') {
+        alert('정답');
+      } else {
+        alert('멍청아');
+      }
+    });
+
+    // setTimeout(function () {
+    //   document.querySelector('#timer').classList.add('notice_hidden');
+    // }, 5000)
+
+    let time = 4;
+    let timer = setInterval(function () {
+      // console.log(time);
+      document.querySelector('#timer').innerHTML = (time) + '초 이내 구매시 사은품 증정!';
+      time--;
+      if (time == -1) {
+        document.querySelector('#timer').classList.add('notice_hidden');
+        clearInterval(timer);
+      }
+    }, 1000);
+
+    let 지금사진 = 0;
+
+    $('.slide-1').on('click', () => {
+      $('.slide-container').css("transform", 'translateX(0vw)');
+      지금사진 = 0;
+    });
+    $('.slide-2').on('click', () => {
+      $('.slide-container').css("transform", 'translateX(-100vw)');
+      지금사진 = 1;
+    });
+    $('.slide-3').on('click', () => {
+      $('.slide-container').css("transform", 'translateX(-200vw)');
+      지금사진 = 2;
+    });
+
+
+    $('.next').on('click', () => {
+      // if (지금사진 == 1) {
+      지금사진++;
+      $('.slide-container').css("transform", 'translateX(-' + 지금사진 + '00vw)');
+      // } else if (지금사진 == 2) {
+      // $('.slide-container').css("transform", 'translateX(-200vw)');
+      // }
+    });
+    $('.prev').on('click', () => {
+      // if (지금사진 == 2) {
+      지금사진--;
+      $('.slide-container').css("transform", 'translateX(-' + 지금사진 + '00vw)');
+      // } else if (지금사진 == 1) {
+      // $('.slide-container').css("transform", 'translateX(0vw)');
+      // }
+    });
+
+
+
+    // 스크롤 이벤트
+    window.addEventListener('scroll', function () {
+      // console.log(window.pageYOffset);
+      if (window.scrollY > 100) {
+        document.querySelector('.navbar-brand').style.fontSize = '14px';
+        // $('.navbar-brand').css("font-size", "14px");
+      } else {
+        document.querySelector('.navbar-brand').style.fontSize = '32px';
+      }
+    });
+
+    const scrollTest = document.querySelector('.scrollTest');
+    scrollTest.addEventListener('scroll', function () {
+      // console.log(scrollTest.scrollHeight);
+      // console.log(scrollTest.scrollTop);
+      // console.log(scrollTest.clientHeight);
+      let 스크롤전체높이 = scrollTest.scrollHeight;
+      let 스크롤높이 = scrollTest.scrollTop;
+      let div크기 = scrollTest.clientHeight;
+      if ((스크롤높이 + div크기) > (스크롤전체높이 - 5)) {
+        alert('동의함?')
+      }
+    });
+
+    const render = document.querySelector('.render');
+    window.addEventListener('scroll', function () {
+      let 스크롤양 = document.querySelector('html').scrollTop;
+      let 실제높이 = document.querySelector('html').scrollHeight;
+      let 보이는높이 = document.querySelector('html').clientHeight;
+      console.log(스크롤양, 실제높이, 보이는높이)
+      if (스크롤양 < (실제높이 - 보이는높이)) {
+        render.style.width = ((스크롤양 / (실제높이 - 보이는높이) * 100) + '%');
+      }
+    })
   </script>
 </body>
 

@@ -3,12 +3,28 @@
   background: lightgrey;
 }
 
+.navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 5;
+}
+
+.navbar-brand {
+  font-size: 32px;
+}
+
 .list-group {
   display: none;
 }
 
 .show {
   display: block;
+}
+
+.render {
+  height: 2px;
+  background: black;
+  /* width: 10%; */
 }
 
 .black-bg {
@@ -53,4 +69,19 @@
 .Light {
   color: black;
   background: white;
+}
+
+.slide-container {
+  width: 300vw;
+  /* transform: translateX(-100vw); */
+  transition: all 1s;
+}
+
+.slide-box {
+  width: 100vw;
+  float: left;
+}
+
+.slide-box img {
+  width: 100%;
 }
