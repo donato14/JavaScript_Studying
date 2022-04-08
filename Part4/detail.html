@@ -12,6 +12,29 @@
 </head>
 
 <body>
+  <div class="container mt-3">
+    <div class="card p-3">
+      <span class="car-name"></span>
+      <span class="car-price"></span>
+    </div>
+  </div>
+
+  <form class="container my-5 form-group">
+    <p>상품선택</p>
+    <select class="form-select mt-2">
+      <option>바지</option>
+      <option>셔츠</option>
+    </select>
+    <select class="form-select mt-2 hide">
+      <option>95</option>
+      <option>100</option>
+    </select>
+    <select class="form-select mt-2">
+      <option>28</option>
+      <option>30</option>
+    </select>
+  </form>
+
   <div class="container mt-5">
     <ul class="list">
       <li class="tab-button orange">Products</li>
@@ -66,6 +89,27 @@
       productsInfo.classList.remove('show');
       informationInfo.classList.remove('show');
       shippingInfo.classList.add('show');
+    });
+
+    let car = {
+      name: '소나타',
+      price: [50000, 3000, 4000]
+    };
+
+    document.querySelector('.car-name').innerHTML = car.name;
+    document.querySelector('.car-price').innerHTML = car.price[0];
+
+    $('.form-select').eq(0).on('input', function () {
+      if ($('.form-select').eq(0).val() == '셔츠') {
+        $('.form-select').eq(1).removeClass('hide');
+        $('.form-select').eq(2).addClass('hide');
+      }
+    });
+    $('.form-select').eq(0).on('input', function () {
+      if ($('.form-select').eq(0).val() == '바지') {
+        $('.form-select').eq(1).addClass('hide');
+        $('.form-select').eq(2).removeClass('hide');
+      }
     });
   </script>
 </body>
